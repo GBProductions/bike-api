@@ -9,7 +9,7 @@ function clearFields() {
 }
 
 $('document').ready(function() {
-  $('form').submit(function(event) {
+  $('#searchButton').click(function(event) {
     event.preventDefault();
     let location = $('#search').val();
     let promise = LocationService.getStolenBikesNearby(location);
@@ -17,14 +17,11 @@ $('document').ready(function() {
       const body = JSON.parse(response);
       console.log(body.bikes);
       for (let i = 0; i < body.bikes.length; i++) {
-        $('.output-location').append(`<p>`);
-        for (let j = 0; j < body[i].length; j++) {
-          $('.show-dino-ipsum').append(`${body[i][j]} `);
-        }
-        $('.show-dino-ipsum').append(`</p>`);
+        $('.output-location').append(`<p class="bike-returned"> ${body.bikes[i]["title"]}, color(s): ${body.bikes[i]["frame_colors"]}, Manufacturer: ${body.bikes[i]["manufacturer_name"]}</p>`);
       }
     }, function(error) {
       $('.showErrors').text(`There was an error processing your request: ${error}`);
     });
+    clearFields();
   });
 });
