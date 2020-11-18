@@ -6,6 +6,23 @@
   <title>Stolen Bikes</title>
 </head>
 <body>
-  <h1>Bikes</h1> 
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Find Your Stolen Bikes</h1>
+      <p class="sub-heading">Use the form to search by location</p>
+    </div>
+    <form>
+      <h4>Missing your bike? Search here!</h4>
+      <div class="location-search form-group">
+        <label for="search" class="label-check-inline">
+        <input type="text" class="form-control" placeholder="Search Bike Index..." id="search">
+        <small id="search-help" class="form-text text-muted">Acceptable types of location search inputs: ZIP code (eg. 11214); City, ST (eg. San Luis Obispo, CA)</small>
+      </div>
+      <button type="button" class="btn btn-info" id="searchButton">Search</button>
+    </form>
+    <div class="output-location">
+
+    </div>
+  </div>  
 </body>
 </html>
