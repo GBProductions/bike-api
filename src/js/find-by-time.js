@@ -1,23 +1,55 @@
+export default class TimeService {  
+  // static findRecentStolen (timeSince) {
+  //   return new Promise(function(resolve, reject) {
+  //     let request = new XMLHttpRequest();
+  //     const url = `https://bikeindex.org/api/v3/search?per_page=3&location=${location}&distance=50&stolenness=stolen`;
+  //     request.onload = function() {
+  //       if (this.status === 200) {
+  //         resolve(request.response);
+  //       } else {
+  //         reject(request.response);
+  //       }
+  //     };
+  //     request.open("GET", url, true);
+  //     request.send();
+  //   });
+  // }
+  // Write a function that takes in a value stored as an instance of Date in JS and returns the value as a human-readable Date (MM/DD/YYYY)
+  static humanTime(dateInstance) {
+    let date = new Date(dateInstance);
+    const monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const dayNum = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const month = monthsOfYear[date.getMonth()];
+    const year = date.getFullYear();
+    const humanDateTime = `${month} ${dayNum} ${year}, at ${hours}:${minutes}`;
+    return humanDateTime;
+  }
+}
+const dateNTimeNow = Date.now();
+// console.log(humanTime(dateNTimeNow));
 
 
 
+// // From StackOverflow, dealing with date/time in JavaScript:
 
+// let nowTime = new Date.now(); // Date.now() grabs the UTC, but this may be what all the date/timestamps are in, even the Bikes API
+// console.log(nowTime);
 
-// From StackOverflow, dealing with date/time in JavaScript:
+// let unix_timestamp = 1549312452
+// // Create a new JavaScript Date object based on the timestamp
+// // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+// var date = new Date(unix_timestamp * 1000);
+// // Hours part from the timestamp
+// var hours = date.getHours();
+// // Minutes part from the timestamp
+// var minutes = "0" + date.getMinutes();
+// // Seconds part from the timestamp
+// var seconds = "0" + date.getSeconds();
 
-let now
-let unix_timestamp = 1549312452
-// Create a new JavaScript Date object based on the timestamp
-// multiplied by 1000 so that the argument is in milliseconds, not seconds.
-var date = new Date(unix_timestamp * 1000);
-// Hours part from the timestamp
-var hours = date.getHours();
-// Minutes part from the timestamp
-var minutes = "0" + date.getMinutes();
-// Seconds part from the timestamp
-var seconds = "0" + date.getSeconds();
+// // Will display time in 10:30:23 format
+// var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-// Will display time in 10:30:23 format
-var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+// console.log(formattedTime);
 
-console.log(formattedTime);
