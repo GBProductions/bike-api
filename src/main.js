@@ -37,6 +37,14 @@ $('document').ready(function() {
     promise.then(function(response, minTime) {
       const body = JSON.parse(response);
       console.log(body.bikes);
+      let recentSteals = [];
+      for (const key in body.bikes) {
+        console.log(key);
+        // if (key === "date_stolen" && "date_stolen" > minTime) {
+          recentSteals.push(this);
+      //  }
+      }
+      console.log(recentSteals);
       for (let j = 0; j < body.bikes.length; j++) {
           // if (body.bikes[j]["date_stolen"] > minTime) {
           $('.output-recent').append(`<p class="recent-steal"> ${body.bikes[j]["title"]}, color(s): ${body.bikes[j]["frame_colors"]}, Manufacturer: ${body.bikes[j]["manufacturer_name"]} Reported Stolen: ${TimeService.humanTime(body.bikes[j]["date_stolen"])}</p>`);
