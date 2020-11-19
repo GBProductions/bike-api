@@ -16,21 +16,25 @@ export default class TimeService {
   // }
   // Write a function that takes in a value stored as an instance of Date in JS and returns the value as a human-readable Date (MM/DD/YYYY)
   static humanTime(dateInstance) {
-    let date = new Date(dateInstance);
+    // let date = new Date(dateInstance);
     const monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const dayNum = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const month = monthsOfYear[date.getMonth()];
-    const year = date.getFullYear();
+    const dayNum = dateInstance.getDate();
+    let hours = dateInstance.getHours();
+    if (hours.length < 2) {
+      hours = "0" + hours;
+    }
+    let minutes = dateInstance.getMinutes();
+    if (minutes.length < 2) {
+      minutes = "0" + minutes;
+    }
+    const month = monthsOfYear[dateInstance.getMonth()];
+    const year = dateInstance.getFullYear();
     const humanDateTime = `${month} ${dayNum} ${year}, at ${hours}:${minutes}`;
     return humanDateTime;
   }
 }
 const dateNTimeNow = Date.now();
-// console.log(humanTime(dateNTimeNow));
-
-
+// console.log(`The current date and time: ${humanTime(dateNTimeNow)}`);
 
 // // From StackOverflow, dealing with date/time in JavaScript:
 

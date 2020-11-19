@@ -30,24 +30,30 @@ $('document').ready(function() {
   $('#within2weeks').click(function(event) {
     event.preventDefault();
     // calculate subtracting two weeks worth of milliseconds to new Date.now, call this date variable minTime
-    let minTime = Date.now() - (14 * 24 * 60 * 60 * 1000);
+    let minTime = Date.now() - (60 * 24 * 60 * 60 * 1000);
     console.log(TimeService.humanTime(minTime));
     let location = $('#search').val();
     let promise = LocationService.getStolenBikesNearby(location);
     promise.then(function(response, minTime) {
       const body = JSON.parse(response);
       console.log(body.bikes);
-      let recentSteals = [];
-      for (const key in body.bikes) {
-        console.log(key);
-        // if (key === "date_stolen" && "date_stolen" > minTime) {
-          recentSteals.push(this);
-      //  }
-      }
-      console.log(recentSteals);
+      let datesStolen = [];
+      body.bikes.forEach(bike => datesStolen.push(bike["date_stolen"]));
+      // let recentSteals = body.bikes.map(function(bike) {
+      //   let dateStolen = bike["date_stolen"]; 
+      //   return dateStolen;
+      // });
+      console.log(datesStolen);
+      // for (const bike of body.bikes) {
+      //   console.log(bike["date_stolen"]);
+      //   // if (key === "date_stolen" && "date_stolen" > minTime) {
+      //   recentSteals.push(bike);
+      // //  }
+      // }
+      
       for (let j = 0; j < body.bikes.length; j++) {
-          // if (body.bikes[j]["date_stolen"] > minTime) {
-          $('.output-recent').append(`<p class="recent-steal"> ${body.bikes[j]["title"]}, color(s): ${body.bikes[j]["frame_colors"]}, Manufacturer: ${body.bikes[j]["manufacturer_name"]} Reported Stolen: ${TimeService.humanTime(body.bikes[j]["date_stolen"])}</p>`);
+        // if (body.bikes[j]["date_stolen"] > minTime) {
+        $('.output-recent').append(`<p class="recent-steal"> ${body.bikes[j]["title"]}, color(s): ${body.bikes[j]["frame_colors"]}, Manufacturer: ${body.bikes[j]["manufacturer_name"]} Reported Stolen: ${TimeService.humanTime(datesStolen[j])}</p>`);
         // }
       }
     }, function(error) {
